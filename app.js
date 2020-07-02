@@ -7,21 +7,18 @@ let choosecity = document.getElementById('loggedcity')
 
 
 
-//API call by city name: api.openweathermap.org/data/2.5/weather?q=<cityName>
+//API call
 document.addEventListener('click', () => {
   let target = event.target
   if (target.classList.contains('btn')) {
-    input1 = document.getElementById('lookforcity').value
-    // console.log(input1)
-    viewpointWeather(input1)
-    //empty out input1
-    document.getElementById('lookforcity').value = ''
+    input1 = document.getElementById('findcity').value
+    weatherdot(input1)
+    document.getElementById('findcity').value = ''
   }
 })
 
-
-const showformercity = _ => {
-  //set to empty before every render
+//log previous city
+const previouscity = _ => {
   choosecity.innerHTML = ''
   for (let i = 0; i < loggedcity.length; i++) {
     let cityNode = document.createElement('div')
@@ -42,17 +39,17 @@ const titleCase = str => {
   }
   return splitStr.join(' ');
 }
-const viewpointWeather = input1 => {
+const weatherdot = input1 => {
   //pushing input1 to local storage
   input1 = titleCase(input1)
   loggedcity.push(input1)
   console.log(loggedcity)
   localStorage.setItem('citymultiple', JSON.stringify(loggedcity))
-  showformercity()
-  getCityWeather(input1)
+  previouscity()
+  weatherincity(input1)
 }
 
-const getCityWeather = input1 => {
+const weatherincity = input1 => {
   viewpoint.innerHTML = ''
   fetch(`https://api.openweathermap.org/data/2.5/weather?q=${input1}&appid=504fb55759317621b3658208c57633c9`)
     .then(response => response.json())
@@ -77,25 +74,25 @@ const getuvdata = (lon, lat) => {
   fetch(`https://api.openweathermap.org/data/2.5/uvi?appid=504fb55759317621b3658208c57633c9&lat=${lat}&lon=${lon}`)
     .then(response => response.json())
     .then(({ value }) => {
-      let uvNode = document.createElement('p')
-      uvNode.textContent = 'UV Index: '
-      let uvSpan = document.createElement('span')
-      uvSpan.textContent = `${value}`
+      let uvn = document.createElement('p')
+      uvn.textContent = 'UV Index: '
+      let uvs = document.createElement('span')
+      uvs.textContent = `${value}`
       value = Math.floor(value)
       if (value < 3) {
-        uvSpan.setAttribute('class', 'Safe')
+        uvs.setAttribute('class', 'Safe')
       }
       else if (value > 2 && value < 6) {
-        uvSpan.setAttribute('class', 'Medium')
+        uvs.setAttribute('class', 'Medium')
       }
       else if (value > 5 && value < 8) {
-        uvSpan.setAttribute('class', 'Moderate')
+        uvs.setAttribute('class', 'Moderate')
       }
       else {
-        uvSpan.setAttribute('class', 'High')
+        uvs.setAttribute('class', 'High')
       }
-      uvNode.append(uvSpan)
-      viewpoint.append(uvNode)
+      uvn.append(uvs)
+      viewpoint.append(uvn)
     })
 
     .catch(error => console.error(error))
@@ -107,24 +104,23 @@ const fivedayget = (lon, lat) => {
     .then(response => response.json())
     .then(data => {
       console.log(data)
-      //converting unix time stamp to a date time
+      //convert
       let list = data.list
       console.log(moment.unix(list[0].dt).format("MM/DD/YYYY"))
       for (let i = 7; i < list.length; i += 7) {
-        let fiveNode = document.createElement('div')
-        fiveNode.setAttribute('class', 'col-sm-2.4 fiveDayStyle')
-        fiveNode.innerHTML = `
-            <h6>${moment.unix(list[i].dt).format("MM/DD/YYYY")}</h6>
+        let daysoffive = document.createElement('div')
+        daysoffive.setAttribute('class', 'col-sm-2.4 fiveDayStyle')
+        daysoffive.innerHTML = `
+            <h5>${moment.unix(list[i].dt).format("MM/DD/YYYY")}</h5>
             <img src ="https://openweathermap.org/img/wn/${list[i].weather[0].icon}.png" alt = "${list[i].weather[0].icon}">
             <p>Temp: ${farenheit(list[i].main.temp)} ºF</p>
             <p>Humidity: ${list[i].main.humidity}%</p>
         `
-        console.log(fiveNode)
-        daysfive.append(fiveNode)
+        console.log(daysoffive)
+        daysfive.append(daysoffive)
       }
-      // starts at index 0 and increases by 7
     })
     .catch(error => console.error(error))
 }
 
-showformercity()
+previouscity()

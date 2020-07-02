@@ -9,9 +9,20 @@ html {
   }
   
   body {
-    background-color: lightgray
+    background-color: gray
   }
   
+  span {
+    padding: 10px;
+  }
+  
+  .fiveDayStyle {
+    background-color: lightblue;
+    color: black;
+    margin: 0 auto;
+    margin-right: 10px;
+    padding: 10px;
+  }
   .viewTop {
     margin-right: 5px;
     padding-left: 2px;
@@ -22,34 +33,22 @@ html {
   }
   
   .High {
-    background-color: red;
+    background-color: maroon;
     color: white
   }
   
   .Safe {
-    background-color: green;
+    background-color: darkgreen;
     color: white
   }
   
   .Medium {
-    background-color: yellow;
+    background-color: gold;
     color: black;
     
   }
   
   .Moderate {
-    background-color: orange;
+    background-color: lightcoral;
     color: black;
-  }
-  
-  span {
-    padding: 5px;
-  }
-  
-  .fiveDayStyle {
-    background-color: lightskyblue;
-    color: black;
-    margin: 0 auto;
-    margin-right: 5px;
-    padding: 10px;
   }
