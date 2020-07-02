@@ -1,11 +1,10 @@
 let input1
 let uvdata
-let loggedcity = JSON.parse(localStorage.getItem('cities')) || []
+let loggedcity = JSON.parse(localStorage.getItem('citymultiple')) || []
 let viewpoint = document.getElementById('cityInfo')
 let daysfive = document.getElementById('fiveDay')
 let choosecity = document.getElementById('loggedcity')
 
-//  API KEY : 504fb55759317621b3658208c57633c9
 
 
 //API call by city name: api.openweathermap.org/data/2.5/weather?q=<cityName>
@@ -48,7 +47,7 @@ const viewpointWeather = input1 => {
   input1 = titleCase(input1)
   loggedcity.push(input1)
   console.log(loggedcity)
-  localStorage.setItem('cities', JSON.stringify(loggedcity))
+  localStorage.setItem('citymultiple', JSON.stringify(loggedcity))
   renderPastCity()
   getCityWeather(input1)
 }
