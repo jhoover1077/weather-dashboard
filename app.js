@@ -1,9 +1,10 @@
 let input1
 let uvdata
-let loggedcity = JSON.parse(localStorage.getItem('citymultiple')) || []
-let viewpoint = document.getElementById('cityInfo')
-let daysfive = document.getElementById('fiveDay')
 let choosecity = document.getElementById('loggedcity')
+let viewpoint = document.getElementById('cityInfo')
+let loggedcity = JSON.parse(localStorage.getItem('citymultiple')) || []
+let daysfive = document.getElementById('fiveDay')
+
 
 
 
