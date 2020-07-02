@@ -2,7 +2,7 @@ html {
     box-sizing: border-box;
   }
   
-  .jumboStyle {
+  .bigjumb {
     text-align: center;
     background-color: black;
     color: white;
@@ -17,7 +17,7 @@ html {
     padding-left: 2px;
   }
   
-  .forecast {
+  .outlook {
     text-align: center
   }
   

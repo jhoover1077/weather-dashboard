@@ -11,16 +11,16 @@ let choosecity = document.getElementById('loggedcity')
 document.addEventListener('click', () => {
   let target = event.target
   if (target.classList.contains('btn')) {
-    input1 = document.getElementById('citySearch').value
+    input1 = document.getElementById('lookforcity').value
     // console.log(input1)
     viewpointWeather(input1)
     //empty out input1
-    document.getElementById('citySearch').value = ''
+    document.getElementById('lookforcity').value = ''
   }
 })
 
 
-const renderPastCity = _ => {
+const showformercity = _ => {
   //set to empty before every render
   choosecity.innerHTML = ''
   for (let i = 0; i < loggedcity.length; i++) {
@@ -48,7 +48,7 @@ const viewpointWeather = input1 => {
   loggedcity.push(input1)
   console.log(loggedcity)
   localStorage.setItem('citymultiple', JSON.stringify(loggedcity))
-  renderPastCity()
+  showformercity()
   getCityWeather(input1)
 }
 
@@ -127,4 +127,4 @@ const getFiveDayForecast = (lon, lat) => {
     .catch(error => console.error(error))
 }
 
-renderPastCity()
+showformercity()
