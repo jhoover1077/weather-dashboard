@@ -17,10 +17,10 @@ html {
   }
   
   .fiveDayStyle {
-    background-color: lightblue;
+    background-color: lightskyblue;
     color: black;
     margin: 0 auto;
-    margin-right: 10px;
+    margin-right: 5px;
     padding: 10px;
   }
   .viewTop {
@@ -49,6 +49,9 @@ html {
   }
   
   .Moderate {
-    background-color: lightcoral;
+    background-color: orange;
     color: black;
+  }
+  .row {
+    margin: auto;
   }
