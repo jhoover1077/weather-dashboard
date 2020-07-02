@@ -21,23 +21,23 @@ html {
     text-align: center
   }
   
-  .uvHigh {
+  .High {
     background-color: red;
     color: white
   }
   
-  .uvSafe {
+  .Safe {
     background-color: green;
     color: white
   }
   
-  .uvMed {
+  .Medium {
     background-color: yellow;
     color: black;
     
   }
   
-  .uvMod {
+  .Moderate {
     background-color: orange;
     color: black;
   }

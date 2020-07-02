@@ -29,7 +29,7 @@ const showformercity = _ => {
     choosecity.append(cityNode)
   }
 }
-const toFarenheit = value => {
+const farenheit = value => {
   value = (value * (9 / 5) - 459.67).toFixed(2)
   return value
 }
@@ -58,7 +58,7 @@ const getCityWeather = input1 => {
     .then(response => response.json())
     .then(({ main: { temp, humidity }, wind: { speed }, coord: { lon, lat } }) => {
       let info = document.createElement('div')
-      temp = toFarenheit(temp)
+      temp = farenheit(temp)
 
       // console.log(temp, humidity, speed, lon, lat)
       info.innerHTML = `<h2>${input1} ${moment().format('MM/DD/YYYY')}</h2>
@@ -68,7 +68,7 @@ const getCityWeather = input1 => {
     `
       viewpoint.append(info)
       getuvdata(lon, lat)
-      getFiveDayForecast(lon, lat)
+      fivedayget(lon, lat)
 
     })
     .catch(error => console.error(error))
@@ -83,16 +83,16 @@ const getuvdata = (lon, lat) => {
       uvSpan.textContent = `${value}`
       value = Math.floor(value)
       if (value < 3) {
-        uvSpan.setAttribute('class', 'uvSafe')
+        uvSpan.setAttribute('class', 'Safe')
       }
       else if (value > 2 && value < 6) {
-        uvSpan.setAttribute('class', 'uvMed')
+        uvSpan.setAttribute('class', 'Medium')
       }
       else if (value > 5 && value < 8) {
-        uvSpan.setAttribute('class', 'uvMod')
+        uvSpan.setAttribute('class', 'Moderate')
       }
       else {
-        uvSpan.setAttribute('class', 'uvHigh')
+        uvSpan.setAttribute('class', 'High')
       }
       uvNode.append(uvSpan)
       viewpoint.append(uvNode)
@@ -101,7 +101,7 @@ const getuvdata = (lon, lat) => {
     .catch(error => console.error(error))
 }
 
-const getFiveDayForecast = (lon, lat) => {
+const fivedayget = (lon, lat) => {
   daysfive.innerHTML = ''
   fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=504fb55759317621b3658208c57633c9`)
     .then(response => response.json())
@@ -116,7 +116,7 @@ const getFiveDayForecast = (lon, lat) => {
         fiveNode.innerHTML = `
             <h6>${moment.unix(list[i].dt).format("MM/DD/YYYY")}</h6>
             <img src ="https://openweathermap.org/img/wn/${list[i].weather[0].icon}.png" alt = "${list[i].weather[0].icon}">
-            <p>Temp: ${toFarenheit(list[i].main.temp)} ºF</p>
+            <p>Temp: ${farenheit(list[i].main.temp)} ºF</p>
             <p>Humidity: ${list[i].main.humidity}%</p>
         `
         console.log(fiveNode)
